@@ -13,12 +13,62 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 
-const onValueChange = database.ref().on('value', (snapshot) => {
-    const val = snapshot.val();
-    console.log(`${val.name} is a  ${val.job.title} at  ${val.location.city}` );
-}, (e) => {
-    console.log('Error with data fetching', e);
+//child_removed
+database.ref('expenses').on('child_removed', (snapshot) => {
+    console.log(snapshot.key, snapshot.val());
 });
+
+// child_changed
+database.ref('expenses').on('child_changed', (snapshot) => {
+    console.log(snapshot.key, snapshot.val());
+});
+
+// child_added
+database.ref('expenses').on('child_added', (snapshot) => {
+    console.log(snapshot.key, snapshot.val());
+});
+
+// database.ref('expenses')
+//         .on('value', (snapshot) => {
+//                 const expenses = [];
+
+//                 snapshot.forEach((childSnapshot) => {
+//                     expenses.push({
+//                         id: childSnapshot.key,
+//                     ...childSnapshot.val()
+//                     });
+//                 });
+//                 console.log(expenses);
+//         });
+
+// database.ref('expenses')
+//         .once('value')
+//         .then((snapshot) => {
+//             const expenses = [];
+//             snapshot.forEach((childSnapshot) => {
+//                 expenses.push({
+//                     id: childSnapshot.key,
+//                 ...childSnapshot.val()
+//                 });
+//             });
+            
+//             console.log(expenses);
+//         });
+
+
+// database.ref('expenses').push({
+//     description:    'Mobile Bill',
+//     note:           'new month mobile bill',
+//     amount:         500,
+//     createdAt:       125000
+// });
+
+// const onValueChange = database.ref().on('value', (snapshot) => {
+//     const val = snapshot.val();
+//     console.log(`${val.name} is a  ${val.job.title} at  ${val.location.city}` );
+// }, (e) => {
+//     console.log('Error with data fetching', e);
+// });
 
 // const onValueChange = database.ref().on('value', (snapshot) => {
 //     console.log(snapshot.val());
@@ -37,7 +87,6 @@ const onValueChange = database.ref().on('value', (snapshot) => {
 // setTimeout(() => {
 //     database.ref('age').set(27);
 // }, 9000);
-
 
 // database.ref('location/city')
 //         .once('value')
