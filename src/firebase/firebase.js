@@ -1,10 +1,6 @@
 import * as firebase from 'firebase';
 
 // Initialize Firebase
-firebase.initializeApp(config);
-
-const database = firebase.database();
-
 const config = {
     apiKey: "AIzaSyC1S3VaZXrThAgkgN7rqxUKyVq-uPk9ctc",
     authDomain: "expensifyapp-2eab0.firebaseapp.com",
@@ -13,6 +9,9 @@ const config = {
     storageBucket: "expensifyapp-2eab0.appspot.com",
     messagingSenderId: "126100334276"
 };
+firebase.initializeApp(config);
+
+const database = firebase.database();
 
 database.ref().set({
     name: 'Daniyal Khan',
