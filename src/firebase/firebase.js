@@ -21,11 +21,23 @@ database.ref().set({
         city: 'Karachi',
         Country: 'Pakistan'
     }
+}).then(() => {
+    console.log('Data is saved');
+}).catch((e) => {
+    console.log('This failed', e);
 });
 
-database.ref('age').set(26);
-database.ref('location/city').set('Lahore');
+
+// database.ref('age').set(26);
+// database.ref('location/city').set('Lahore');
+
+
+
 database.ref('attributes').set({
     height: 5.6,
     weight: 65
+}).then(() => {
+    console.log('atributes is saved');
+}).catch((e) => {
+    console.log('failed att', e);
 });
