@@ -16,7 +16,11 @@ const database = firebase.database();
 database.ref().set({
     name: 'Daniyal Khan',
     age: 25,
-    isSingle: true,
+    stressLevel: 6,
+    job: {
+        title: 'Software Developer',
+        company: 'Google'
+    },
     location: {
         city: 'Karachi',
         Country: 'Pakistan'
@@ -40,11 +44,24 @@ database.ref().set({
 //     console.log('failed att', e);
 // });
 
-database.ref('isSingle')
-        .remove()
-        .then(() => {
-            console.log('Data was removed');
-        })
-        .catch((e) => {
-            console.log('did not remove data', e);
-        });
+// database.ref('isSingle')
+//         .remove()
+//         .then(() => {
+//             console.log('Data was removed');
+//         })
+//         .catch((e) => {
+//             console.log('did not remove data', e);
+//         });
+
+// database.ref().update({
+//     name: 'Daniyal',
+//     age: 25,
+//     job: 'Software Developer',
+//     isSingle: null
+// });
+
+database.ref().update({
+    stressLevel:        9,
+    'job/company':      'Amazone',
+    'location/city':    'Seattle' 
+});
