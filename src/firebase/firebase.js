@@ -13,23 +13,59 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 
-database.ref().set({
-    name: 'Daniyal Khan',
-    age: 25,
-    stressLevel: 6,
-    job: {
-        title: 'Software Developer',
-        company: 'Google'
-    },
-    location: {
-        city: 'Karachi',
-        Country: 'Pakistan'
-    }
-}).then(() => {
-    console.log('Data is saved');
-}).catch((e) => {
-    console.log('This failed', e);
+const onValueChange = database.ref().on('value', (snapshot) => {
+    const val = snapshot.val();
+    console.log(`${val.name} is a  ${val.job.title} at  ${val.location.city}` );
+}, (e) => {
+    console.log('Error with data fetching', e);
 });
+
+// const onValueChange = database.ref().on('value', (snapshot) => {
+//     console.log(snapshot.val());
+// }, (e) => {
+//     console.log('Error with data fetching', e);
+// });
+
+// setTimeout(() => {
+//     database.ref('age').set(29);
+// }, 3000);
+
+// setTimeout(() => {
+//     database.ref().off(onValueChange);
+// }, 6000);
+
+// setTimeout(() => {
+//     database.ref('age').set(27);
+// }, 9000);
+
+
+// database.ref('location/city')
+//         .once('value')
+//         .then((snapshot) => {
+//             const val = snapshot.val();
+//             console.log(val);
+//         })
+//         .catch((e) => {
+//             console.log('Error fetching data', e);
+//         });
+
+// database.ref().set({
+//     name: 'Daniyal Khan',
+//     age: 25,
+//     stressLevel: 6,
+//     job: {
+//         title: 'Software Developer',
+//         company: 'Google'
+//     },
+//     location: {
+//         city: 'Karachi',
+//         Country: 'Pakistan'
+//     }
+// }).then(() => {
+//     console.log('Data is saved');
+// }).catch((e) => {
+//     console.log('This failed', e);
+// });
 
 
 // database.ref('age').set(26);
@@ -60,8 +96,8 @@ database.ref().set({
 //     isSingle: null
 // });
 
-database.ref().update({
-    stressLevel:        9,
-    'job/company':      'Amazone',
-    'location/city':    'Seattle' 
-});
+// database.ref().update({
+//     stressLevel:        9,
+//     'job/company':      'Amazone',
+//     'location/city':    'Seattle' 
+// });
